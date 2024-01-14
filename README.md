@@ -18,22 +18,23 @@ Code generation could be performed as part of the build process, but since chang
 The `generator` module is not meant for distribution, so it is not packaged into any jar.
 
 ## Inception
-This project began from a need to find the State and Time Zone containing a given Lat/Long pair, but without calling any external APIs, getting the data from a database, or from data loaded from files every time the Application starts. (It was also an opportunity to explore code generation with Roaster.)
+This project began from a need to find the State and Time Zone containing a given Lat/Long pair, but without getting the data from an external API, a database, or from files loaded into memory every time the Application starts. (It was also an opportunity to explore code generation with Roaster.)
 
 In the given scenario, the Lat/Long pair is User input, so if using an external API, that would mean an additional API call for every request to the initial endpoint to get data that doesn't change very often. 
 
-If querying a database, the situation would be better, but the database needs to populated and that may need to be done with migration scripts, using a product like Flyway, for example. And since the shape data is quite large, creating and maintaining those scripts may be difficult and best done using a Java migration to load the data from a shape file, but this will slow down the start-up time for local development and integration testing. 
+If querying a database, the situation would be better, but the database would need to be populated, and that may mean using migration scripts, with a product like Flyway, for example. But since the shape data is quite large, creating and maintaining those scripts won't be so easy, and it will slow down the start-up time for local development and integration tests. 
 
 The situation is pretty much the same if loading data from the shape files into memory. It will put more load on Application starts.
 
-As a simple library, the contained data can be plugged into any Application built with Spring Boot 3 in an effective and way without taking on much of a performance hit nor creating additional friction for developers.
+As a simple library, the contained data can be plugged into any Application using Spring Framework 6 while avoiding performance hits and additional friction for developers.
 
 ## Requirements
 ### Java 17
 https://adoptium.net/temurin/releases/?version=17
 
 ## Dependencies
-- Spring Data 3.2.1
+- Spring Framework Core 6.1.2
+- Spring Framework Context 6.1.2
 - GeoTools 28.5
 - Roaster 2.29.0.Final (generator module only)
 - SLF4J 2.0.7 (generator module only)
